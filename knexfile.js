@@ -1,15 +1,13 @@
 // Update with your config settings.
-require('dotenv').config();
 
 module.exports = {
-
   development: {
     client: 'postgres',
     connection: {
       host: 'localhost',
       database: 'webdb3',
-      user:     process.env.username,
-      password: process.env.password
+      user: no,    // removed
+      password: no // removed
     },
     migrations: {
       directory: './data/migrations'
