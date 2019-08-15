@@ -5,7 +5,7 @@ const db = knex(knexConfig.development)
 
 module.exports = {
   find,
-  findByID,
+  findById,
   findSteps,
   add,
   update,
@@ -16,16 +16,17 @@ function find() {
   return db('schemes')
 }
 
-function findByID(id) {
+function findById(id) {
   return db('schemes')
     .where({ id })
 }
 
-function findSteps(id) {
-  return db('schemes AS s')
-    .join('steps AS st')
-    .select('st.id', 's.scheme_name', 'st.step_number' ,  'st.instructions')
-    .where('st.scheme_id' = id)
+function findSteps(schemeid) {
+  return db('schemes')
+    .join('steps', 'steps.scheme_id', '=', 'schemes.id')
+    .where({id: schemeid})
+    .select('steps.id', 'schemes.scheme_name', 'steps.step_number' , 'steps.instructions')
+    // .where('st.scheme_id = id')
 }
 
 function add(scheme) {
@@ -33,14 +34,14 @@ function add(scheme) {
     .insert(scheme)
 }
 
-function update(changes, id) {
+function update(changes, schemeid) {
   return db('schemes')
-    .where('schemes.id' = id)
+    .where({id: schemeid})
     .update(changes)
 }
 
-function remove(id) {
+function remove(schemeid) {
   return db('schemes')
-    .where('schemes.id' = id)
+    .where({id: schemeid})
     .del()
 }

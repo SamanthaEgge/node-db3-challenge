@@ -6,8 +6,7 @@ module.exports = {
     connection: {
       host: 'localhost',
       database: 'webdb3',
-      user: no,    // removed
-      password: no // removed
+
     },
     migrations: {
       directory: './data/migrations'

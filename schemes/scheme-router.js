@@ -25,6 +25,7 @@ router.get('/:id', async (req, res) => {
       res.status(404).json({ message: 'Could not find scheme with given id.' })
     }
   } catch (err) {
+    console.log(err)
     res.status(500).json({ message: 'Failed to get schemes' });
   }
 });
@@ -41,6 +42,7 @@ router.get('/:id/steps', async (req, res) => {
       res.status(404).json({ message: 'Could not find steps for given scheme' })
     }
   } catch (err) {
+    console.log('this be the error', err)
     res.status(500).json({ message: 'Failed to get steps' });
   }
 });
